@@ -37,6 +37,9 @@ composer update topthink/framework
 
 [完全开发手册](https://www.kancloud.cn/manual/thinkphp6_0/content)
 
+## 教程
+[tp6基础教程](https://www.php.cn/php/php-tp6-requests.html)
+
 ## 参与开发
 
 请参阅 [ThinkPHP 核心框架包](https://github.com/top-think/framework)。
