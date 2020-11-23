@@ -29,7 +29,7 @@ class Http extends Handle
         // 参数验证错误
         if ($e instanceof ValidateException) {
 //            return json($e->getError(), 422);
-            return (new ResponseJson)->error($status,$e->getError(),null,422);
+            return (new ResponseJson)->error($status,$e->getError(),null,200);
         }
 
         // 请求异常
@@ -42,7 +42,7 @@ class Http extends Handle
             // 其他错误交给系统处理
             return parent::render($request, $e);
         }else{
-            return (new ResponseJson)->error($status,$e->getMessage(),null);
+            return (new ResponseJson)->error($status,$e->getMessage(),null,$e->getStatusCode());
         }
 
     }

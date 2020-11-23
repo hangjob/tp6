@@ -8,7 +8,8 @@
 
 
 namespace app\api\controller;
-
+use app\api\model\Ads as AdsModel;
+use app\validate\Ads as AdsValidate;
 
 class Blog extends BaseController
 {
@@ -31,11 +32,9 @@ class Blog extends BaseController
     }
 
     public function abnormal(){
-        echo '异常处理';
-        $err = [
-            'msg'=>'sign验签不能为空'
-        ];
-        abort(404, '页面异常');
+        // 验证数据
+        validate(AdsValidate::class)->batch(true)->check(['adURL'=>'123456','adName'=>'测试数据']);
+        ( new AdsModel())->insert(['adURL'=>time()]);
     }
 
 }

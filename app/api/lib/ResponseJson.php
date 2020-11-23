@@ -10,6 +10,8 @@
 namespace app\api\lib;
 
 
+use think\facade\Request;
+
 class ResponseJson
 {
     /**
@@ -45,10 +47,12 @@ class ResponseJson
      */
     private function jsonResponse($code, $message, $data, $httpCode = 200){
 
+
         $result = [
             'code' => $code, // 业务状态码
             'message' => $message,
-            'result' => $data
+            'result' => $data,
+            'url' => Request::url(true)
         ];
 
         return json($result, $httpCode);
