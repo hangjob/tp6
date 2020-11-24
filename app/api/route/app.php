@@ -19,3 +19,8 @@ Route::group('blog', function () {
     Route::rule('abnormal', 'abnormal');
     Route::rule('detail/:id', 'detail');
 })->ext($urlPrefix)->prefix('blog/')->append(['status'=>1]);
+
+
+Route::group('login',function (){
+    Route::rule('/','login');
+})->ext($urlPrefix)->prefix('login/');

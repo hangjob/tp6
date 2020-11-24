@@ -10,7 +10,12 @@
 namespace app\api\controller;
 
 
-class Login
+class Login extends BaseController
 {
+
+    public function login(){
+        $post = input('post.');
+        validate(\app\validate\Login::class)->batch(true)->check($post);
+    }
 
 }
