@@ -45,16 +45,14 @@ class ResponseJson
      * @param int $httpCode
      * @return \think\response\Json
      */
-    private function jsonResponse($code, $message, $data, $httpCode = 200){
-
+    public function jsonResponse($code = 1, $message = '请求成功', $data, $httpCode = 200){
 
         $result = [
             'code' => $code, // 业务状态码
             'message' => $message,
-            'result' => $data,
+            'data' => $data,
             'url' => Request::url(true)
         ];
-
         return json($result, $httpCode);
     }
 }

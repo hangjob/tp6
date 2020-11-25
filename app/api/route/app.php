@@ -23,4 +23,6 @@ Route::group('blog', function () {
 
 Route::group('login',function (){
     Route::rule('/','login');
+    Route::rule('userinfo','userinfo');
+    Route::rule('register','register');
 })->ext($urlPrefix)->prefix('login/');
