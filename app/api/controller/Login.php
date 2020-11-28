@@ -17,7 +17,7 @@ class Login extends BaseController
         $post = input('post.');
         validate(\app\validate\Login::class)->batch(true)->check($post);
         $member = new Member();
-        $user = $member->where('usermail',$post['usermail'])->where('status',1)->find();
+        $user = $member->getUserInfo('usermail',$post['usermail']);
         if($user){
             if($user['password'] === md5($post['password'])){
                 session(null);
@@ -35,7 +35,7 @@ class Login extends BaseController
         $userid = session('userid');
         if($userid){
             $member = new Member();
-            $user = $member->where('userid',$userid)->find();
+            $user = $member->getUserInfo('userid',$userid);
             return $this->showWebData(['data'=>$user->hidden(['password','validate','userip'])]);
         }else{
             return $this->showWebData(['message'=>'小可爱，还未登录','code'=>0]);

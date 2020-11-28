@@ -26,3 +26,8 @@ Route::group('login',function (){
     Route::rule('userinfo','userinfo');
     Route::rule('register','register');
 })->ext($urlPrefix)->prefix('login/');
+
+
+Route::group('navtag',function (){
+    Route::rule('detail/:id','detail');
+})->ext($urlPrefix)->prefix('navtag/');
