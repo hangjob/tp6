@@ -35,6 +35,7 @@ class Navtag extends BaseController
                 }]);
             }
         ])->find();
+
         return $this->showWebData(['data'=>$detail]);
     }
 

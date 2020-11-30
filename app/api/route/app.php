@@ -31,3 +31,9 @@ Route::group('login',function (){
 Route::group('navtag',function (){
     Route::rule('detail/:id','detail');
 })->ext($urlPrefix)->prefix('navtag/');
+
+
+Route::group('discuss',function (){
+    Route::rule('items','items');
+    Route::rule('add','add');
+})->ext($urlPrefix)->prefix('discuss/');

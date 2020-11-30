@@ -10,6 +10,7 @@
 namespace app\api\controller;
 
 use app\api\lib\ResponseJson;
+use think\facade\Db;
 
 class BaseController extends \app\BaseController
 {
@@ -40,5 +41,16 @@ class BaseController extends \app\BaseController
             $httpCode = 200;
         }
         return (new ResponseJson())->jsonResponse($data['code'], $data['message'], $data['data'], $httpCode);
+    }
+
+
+    public function getUserId(){
+        $uid = session('userid');
+        if (!empty($uid)){
+            $data = Db::table('tpt_member')->where('userid', $uid)->field('userid')->value('userid');
+            return $data;
+        }else{
+            return false;
+        }
     }
 }
