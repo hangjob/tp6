@@ -36,4 +36,5 @@ Route::group('navtag',function (){
 Route::group('discuss',function (){
     Route::rule('items','items');
     Route::rule('add','add');
+    Route::rule('addRevert','addRevert');
 })->ext($urlPrefix)->prefix('discuss/');

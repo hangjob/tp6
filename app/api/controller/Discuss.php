@@ -11,6 +11,7 @@ namespace app\api\controller;
 
 
 use app\api\model\Discuss as DiscussModel;
+use app\api\model\Revert;
 use think\facade\Request;
 
 class Discuss extends BaseController
@@ -41,6 +42,21 @@ class Discuss extends BaseController
             $post = input('post.');
             validate(\app\validate\DiscussAdd::class)->batch(true)->check($post);
             $model = new DiscussModel();
+            $post['uid'] = $userid;
+            $data = Request::only($post);
+            $model->save($data);
+            return $this->showWebData(['data'=>$model->id]);
+        }else{
+            return $this->showWebData(['message'=>'小可爱，请先登录','code'=>0]);
+        }
+    }
+
+    public function addRevert(){
+        $userid = $this->getUserId();
+        if($userid){
+            $post = input('post.');
+            validate(\app\validate\Revert::class)->batch(true)->check($post);
+            $model = new Revert();
             $post['uid'] = $userid;
             $data = Request::only($post);
             $model->save($data);
