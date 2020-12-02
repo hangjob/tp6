@@ -13,8 +13,7 @@ function get_http_type()
 }
 
 function url_prefix(){
-    return 'https://www.vipbic.com';
-    $app_debug = \think\Config::get("app_debug");
+    $app_debug = config("app_debug");
     if($app_debug){
         return get_http_type() . $_SERVER['HTTP_HOST'];
     }else{

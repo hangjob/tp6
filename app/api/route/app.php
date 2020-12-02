@@ -30,6 +30,8 @@ Route::group('login',function (){
 
 Route::group('navtag',function (){
     Route::rule('detail/:id','detail');
+    Route::rule('addlike','addlike');
+    Route::rule('items','items');
 })->ext($urlPrefix)->prefix('navtag/');
 
 

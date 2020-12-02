@@ -14,7 +14,14 @@ class Navtag extends BaseController
 {
 
     public function items(){
+        $navtag = new ModelNavtag();
+        $where['shows'] = 1;
+        $where['pic'] = array('neq','');
+        $data = $navtag->where($where)->with(['member'=>function($query){
+            $query->field('userid,username,userhead');
+        }])->field('id,describe,it_name,pic,keywords,create_time')->paginate(20,false);
 
+        return $this->showWebData(['data'=>$data]);
     }
 
     public function detail($id){
@@ -39,6 +46,13 @@ class Navtag extends BaseController
         return $this->showWebData(['data'=>$detail]);
     }
 
+
+    // 点赞
+    public function addlike($id){
+        $navtag = new ModelNavtag();
+        $data = $navtag->where('id', $id)->inc('like', 1)->update();
+        return $this->showWebData(['data'=>$data]);
+    }
 
 
 }

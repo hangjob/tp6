@@ -25,6 +25,7 @@ class Navtag extends BaseModel
         }
     }
 
+
     public function taxonomic(){
         return $this->hasOne('Taxonomic','id','parentid');
     }
