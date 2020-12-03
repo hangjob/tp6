@@ -15,14 +15,20 @@ class Navtag extends BaseController
 
     public function items(){
         $navtag = new ModelNavtag();
-        $where['shows'] = 1;
-        $where['pic'] = array('neq','');
-        $data = $navtag->where($where)->with(['member'=>function($query){
-            $query->field('userid,username,userhead');
-        }])->field('id,describe,it_name,pic,keywords,create_time')->paginate(20,false);
-
-        return $this->showWebData(['data'=>$data]);
+        $navItems = $navtag->with(['taxonomic'=>function($query){
+            $query->field('id,name,parentid');
+            $query->with(['primary'=>function($query){
+                $query->field('id,name');
+            }]);
+        },'member'=>function($query){
+            $query->field('userid,username');
+        }])->where("pic",'not null')
+            ->order('id desc')->field('id,describe,it_name,pic,keywords,create_time,parentid,uid')
+            ->paginate(12,true);
+        return $this->showWebData(['data'=>$navItems]);
     }
+
+
 
     public function detail($id){
         $navtag = new ModelNavtag();

@@ -17,7 +17,7 @@ function url_prefix(){
     if($app_debug){
         return get_http_type() . $_SERVER['HTTP_HOST'];
     }else{
-        return get_http_type() . 'www.itnavs.com';
+        return get_http_type() . 'www.vipbic.com';
     }
 }
 return [

@@ -17,14 +17,21 @@ class Navtag extends BaseModel
     protected $updateTime = 'update_time';     //数据更新的时候，update_at 这个字段自动写入时间戳
 
 
+    protected $globalScope = ['shows'];
+
+    public function scopeShows($query)
+    {
+        $query->where('shows',1);
+    }
+
+
     public function getImgsAttr($value,$data){
         if($value){
             return $this->urlPrefix($value,$data);
         }else{
-            return '';
+            return null;
         }
     }
-
 
     public function taxonomic(){
         return $this->hasOne('Taxonomic','id','parentid');
