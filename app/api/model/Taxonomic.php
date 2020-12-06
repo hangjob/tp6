@@ -9,7 +9,6 @@
 
 namespace app\api\model;
 
-
 class Taxonomic extends BaseModel
 {
 
@@ -18,5 +17,9 @@ class Taxonomic extends BaseModel
         return $this->hasOne('Primary','id','parentid');
     }
 
+
+    public function navtag(){
+        return $this->hasMany('Navtag','parentid','id');
+    }
 
 }

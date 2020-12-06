@@ -13,5 +13,8 @@ namespace app\api\model;
 class Primary extends BaseModel
 {
 
+    public function taxonomic(){
+        return $this->hasMany('Taxonomic','parentid','id');
+    }
 
 }

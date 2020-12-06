@@ -33,6 +33,12 @@ class Navtag extends BaseModel
         }
     }
 
+    public function getAuthorAttr($value,$data){
+        $color = config('color');
+        $index = array_rand($color,1);
+        return $color[$index];
+    }
+
     public function taxonomic(){
         return $this->hasOne('Taxonomic','id','parentid');
     }
@@ -41,5 +47,4 @@ class Navtag extends BaseModel
     public function zan(){
         return $this->hasMany('Zan','fid','id')->where('type',1);
     }
-
 }

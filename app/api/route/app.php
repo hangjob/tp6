@@ -32,7 +32,12 @@ Route::group('navtag',function (){
     Route::rule('detail/:id','detail');
     Route::rule('addlike','addlike');
     Route::rule('items','items');
+    Route::rule('ditems','ditems');
 })->ext($urlPrefix)->prefix('navtag/');
+
+Route::group('taxonomic',function (){
+    Route::rule('items/:id','items');
+})->ext($urlPrefix)->prefix('taxonomic/');
 
 
 Route::group('discuss',function (){
@@ -40,3 +45,12 @@ Route::group('discuss',function (){
     Route::rule('add','add');
     Route::rule('addRevert','addRevert');
 })->ext($urlPrefix)->prefix('discuss/');
+
+Route::group('wxcontent',function (){
+    Route::rule('items','items');
+    Route::rule('detail/:id','detail');
+})->ext($urlPrefix)->prefix('wxcontent/');
+
+Route::group('wxarticle',function (){
+    Route::rule('correlation','correlation');
+})->ext($urlPrefix)->prefix('wxarticle/');
