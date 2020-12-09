@@ -49,6 +49,7 @@ Route::group('discuss',function (){
 Route::group('wxcontent',function (){
     Route::rule('items','items');
     Route::rule('detail/:id','detail');
+    Route::rule('groups','groups');
 })->ext($urlPrefix)->prefix('wxcontent/');
 
 Route::group('wxarticle',function (){

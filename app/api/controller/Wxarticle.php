@@ -22,5 +22,4 @@ class Wxarticle extends BaseController
         $data['wxsj'] = (new ModelWxcontent())->where('ArticleType','HOT')->limit(20)->field('ArticleTitle,id,ArticleType')->select();
         return $this->showWebData(['data'=>$data]);
     }
-
 }
