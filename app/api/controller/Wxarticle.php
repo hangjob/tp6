@@ -8,7 +8,7 @@
 
 
 namespace app\api\controller;
-use app\api\model\Wxcontent as ModelWxcontent;
+//use app\api\model\Wxcontent as ModelWxcontent;
 use app\api\model\Wxarticle as ModelWxarticle;
 
 class Wxarticle extends BaseController
@@ -18,8 +18,8 @@ class Wxarticle extends BaseController
         $model = new ModelWxarticle();
         $data['new'] = $model->limit(12)->order('id desc')->select();
         $data['record'] = (new \app\api\model\Navtag())->limit(12)->order('id desc')->field('it_name,id,describe')->select();
-        $data['wx'] = (new ModelWxcontent())->where('ArticleType','TECH')->limit(12)->order('id desc')->field('ArticleTitle,id,ArticleType')->select();
-        $data['wxsj'] = (new ModelWxcontent())->where('ArticleType','HOT')->limit(20)->field('ArticleTitle,id,ArticleType')->select();
+//        $data['wx'] = (new ModelWxcontent())->where('ArticleType','TECH')->limit(12)->order('id desc')->field('ArticleTitle,id,ArticleType')->select();
+//        $data['wxsj'] = (new ModelWxcontent())->where('ArticleType','HOT')->limit(20)->field('ArticleTitle,id,ArticleType')->select();
         return $this->showWebData(['data'=>$data]);
     }
 }
