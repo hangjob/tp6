@@ -13,7 +13,8 @@ use app\api\model\Taxonomic as ModelTaxonomic;
 class Taxonomic extends BaseController
 {
 
-    public function items($id){
+    public function items(){
+        $id = input('id');
         $taxonomic = new ModelTaxonomic();
         $data['info'] = (new \app\api\model\Primary())->where('id',$id)->find();
         $data['items'] = $taxonomic->where('parentid',$id)->field('id,parentid,name')->with(['navtag'=>function($query){

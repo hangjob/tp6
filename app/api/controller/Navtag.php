@@ -30,7 +30,8 @@ class Navtag extends BaseController
 
 
 
-    public function detail($id){
+    public function detail(){
+        $id = input('id');
         $navtag = new ModelNavtag();
         $detail = $navtag->where('id',$id)->with([
             'taxonomic'=>function($query){

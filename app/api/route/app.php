@@ -29,14 +29,14 @@ Route::group('login',function (){
 
 
 Route::group('navtag',function (){
-    Route::rule('detail/:id','detail');
+    Route::rule('detail','detail');
     Route::rule('addlike','addlike');
     Route::rule('items','items');
     Route::rule('ditems','ditems');
 })->ext($urlPrefix)->prefix('navtag/');
 
 Route::group('taxonomic',function (){
-    Route::rule('items/:id','items');
+    Route::rule('items','items');
 })->ext($urlPrefix)->prefix('taxonomic/');
 
 
