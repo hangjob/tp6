@@ -8,7 +8,7 @@
 
 use think\facade\Route;
 
-$urlPrefix = 'html';
+$urlPrefix = '';
 
 // 使用前缀 prefix
 // 添加额外参数 append
@@ -55,3 +55,14 @@ Route::group('wxcontent',function (){
 Route::group('wxarticle',function (){
     Route::rule('correlation','correlation');
 })->ext($urlPrefix)->prefix('wxarticle/');
+
+
+Route::group('taobao',function (){
+    Route::rule('items','items');
+})->ext($urlPrefix)->prefix('taobao/');
+
+
+Route::group('configuration',function (){
+    Route::rule('navcount','navcount');
+})->ext($urlPrefix)->prefix('configuration/');
+

@@ -24,7 +24,7 @@ class Navtag extends BaseController
             $query->field('userid,username');
         }])->where("pic",'not null')
             ->order('id desc')->field('id,describe,it_name,pic,keywords,create_time,parentid,uid')
-            ->paginate(12,true);
+            ->paginate(12,false);
         return $this->showWebData(['data'=>$navItems]);
     }
 
