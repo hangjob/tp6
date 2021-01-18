@@ -37,6 +37,7 @@ Route::group('navtag',function (){
 
 Route::group('taxonomic',function (){
     Route::rule('items','items');
+    Route::rule('youlike','youlike');
 })->ext($urlPrefix)->prefix('taxonomic/');
 
 
@@ -61,6 +62,11 @@ Route::group('taobao',function (){
     Route::rule('items','items');
 })->ext($urlPrefix)->prefix('taobao/');
 
+
+Route::group('figure',function (){
+    Route::rule('items','items');
+    Route::rule('bans','bans');
+})->ext($urlPrefix)->prefix('figure/');
 
 Route::group('configuration',function (){
     Route::rule('navcount','navcount');

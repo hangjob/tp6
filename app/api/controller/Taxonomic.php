@@ -23,4 +23,14 @@ class Taxonomic extends BaseController
         return $this->showWebData(['data'=>$data]);
     }
 
+    // 知道你喜欢
+    public function youlike(){
+        $id = input('id');
+        $taxonomic = new ModelTaxonomic();
+        $data = $taxonomic->where('parentid',$id)->field('id,parentid,name')->with(['navtag'=>function($query){
+            $query->withLimit(4)->order('id desc')->field('id,describe,it_name,pic,parentid,uid,icon,author');
+        }])->limit(4)->select();
+        return $this->showWebData(['data'=>$data]);
+    }
+
 }
