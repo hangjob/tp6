@@ -33,6 +33,8 @@ Route::group('navtag',function (){
     Route::rule('addlike','addlike');
     Route::rule('items','items');
     Route::rule('ditems','ditems');
+    Route::rule('popularIt','popularIt');
+    Route::rule('daily','daily');
 })->ext($urlPrefix)->prefix('navtag/');
 
 Route::group('taxonomic',function (){

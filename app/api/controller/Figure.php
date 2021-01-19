@@ -15,7 +15,7 @@ class Figure extends BaseController
 
     public function items(){
         $model = new FigureModel();
-        $data = $model->where('shows',1)->paginate(15,false);
+        $data = $model->where('shows',1)->paginate(25,false);
         return $this->showWebData(['data'=>$data]);
     }
 

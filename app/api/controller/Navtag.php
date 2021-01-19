@@ -33,7 +33,7 @@ class Navtag extends BaseController
     public function detail(){
         $id = input('id');
         $navtag = new ModelNavtag();
-        $detail = $navtag->where('id',$id)->with([
+        $data['detail'] = $navtag->where('id',$id)->with([
             'taxonomic'=>function($query){
                 $query->field('id,name,parentid,des');
                 $query->with(['primary'=>function($query){
@@ -49,8 +49,9 @@ class Navtag extends BaseController
                 }]);
             }
         ])->find();
-
-        return $this->showWebData(['data'=>$detail]);
+        $data['prv'] = $navtag->where('id','>',$data['detail']['id'])->order('id asc')->field('it_name,icon,id,pic,describe,create_time')->limit('1')->find();
+        $data['nxet'] = $navtag->where('id','<',$data['detail']['id'])->order('id desc')->field('it_name,icon,id,pic,describe,create_time')->limit('1')->find();
+        return $this->showWebData(['data'=>$data]);
     }
 
 
@@ -61,5 +62,25 @@ class Navtag extends BaseController
         return $this->showWebData(['data'=>$data]);
     }
 
+
+    // 热点
+    public function popularIt(){
+        $model = new ModelNavtag();
+        $data = $model->where('hits >= 1000  AND shows = 1')->limit(10)->select();
+        return $this->showWebData(['data'=>$data]);
+    }
+
+
+    // 每日推荐
+    public function daily(){
+        $model = new ModelNavtag();
+        $data = $model->order('id desc')->with(['taxonomic'=>function($query){
+            $query->field('id,name,parentid,des');
+            $query->with(['primary'=>function($query){
+                $query->field('id,name,mark,des');
+            }]);
+        }])->limit(10)->select();
+        return $this->showWebData(['data'=>$data]);
+    }
 
 }
