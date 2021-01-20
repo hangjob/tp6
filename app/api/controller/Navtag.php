@@ -9,7 +9,7 @@
 
 namespace app\api\controller;
 use app\api\model\Navtag as ModelNavtag;
-
+use app\api\model\Taxonomic;
 class Navtag extends BaseController
 {
 
@@ -81,6 +81,14 @@ class Navtag extends BaseController
             }]);
         }])->limit(10)->select();
         return $this->showWebData(['data'=>$data]);
+    }
+
+
+    public function category(){
+        $taxonomic = (new Taxonomic())->where('shows',1)->with('items')
+            ->field('name,des,icon,id,parentid,create_time')->withCount('navtag')
+            ->paginate(12,false);
+        return $this->showWebData(['data'=>$taxonomic]);
     }
 
 }
