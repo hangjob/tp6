@@ -75,3 +75,9 @@ Route::group('configuration',function (){
     Route::rule('navcount','navcount');
 })->ext($urlPrefix)->prefix('configuration/');
 
+Route::group('navtheme',function (){
+    Route::rule('items','items');
+    Route::rule('detail','detail');
+})->ext($urlPrefix)->prefix('navtheme/');
+
+

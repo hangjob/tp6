@@ -49,6 +49,7 @@ class Navtag extends BaseController
                 }]);
             }
         ])->find();
+        $data['popularIt'] = $this->popularIt();
         $data['prv'] = $navtag->where('id','>',$data['detail']['id'])->order('id asc')->field('it_name,icon,id,pic,describe,create_time')->limit('1')->find();
         $data['nxet'] = $navtag->where('id','<',$data['detail']['id'])->order('id desc')->field('it_name,icon,id,pic,describe,create_time')->limit('1')->find();
         return $this->showWebData(['data'=>$data]);
@@ -67,7 +68,7 @@ class Navtag extends BaseController
     public function popularIt(){
         $model = new ModelNavtag();
         $data = $model->where('hits >= 1000  AND shows = 1')->limit(10)->select();
-        return $this->showWebData(['data'=>$data]);
+        return $data;
     }
 
 
