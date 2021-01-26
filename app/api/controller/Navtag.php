@@ -41,7 +41,7 @@ class Navtag extends BaseController
                 }]);
             },
             'member'=>function($query){
-                $query->field('userid,userhead,username,userhome');
+                $query->field('userid,userhead,username,userhome,description');
             },
             'zan'=>function($query){
                 $query->limit(10)->with(['member'=>function($query){
