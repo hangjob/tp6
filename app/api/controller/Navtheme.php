@@ -26,7 +26,7 @@ class Navtheme extends BaseController
         $id = input('id');
         $navtheme = new NavthemeModel();
         $detail = $navtheme->where('id',$id)->with(['member'=>function($query){
-            $query->field('userid,username,description');
+            $query->field('userid,username,description,userhead');
         },'taxonomic'=>function($query){
             $query->field('name,id,parentid');
             $query->with('primary');
