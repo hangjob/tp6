@@ -50,6 +50,8 @@ class Navtag extends BaseController
             }
         ])->find();
         $data['popularIt'] = $this->popularIt();
+        $data['latest'] = $navtag->order('id desc')->limit(6)->field('it_name,id,describe,pic')->select();
+        $data['hot'] = $navtag->where('pic','not null')->order('hits desc')->limit(6)->field('it_name,id,describe,pic')->select();
         $data['prv'] = $navtag->where('id','>',$data['detail']['id'])->order('id asc')->field('it_name,icon,id,pic,describe,create_time')->limit('1')->find();
         $data['nxet'] = $navtag->where('id','<',$data['detail']['id'])->order('id desc')->field('it_name,icon,id,pic,describe,create_time')->limit('1')->find();
         return $this->showWebData(['data'=>$data]);
