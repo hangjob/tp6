@@ -37,4 +37,9 @@ class Navtheme extends BaseModel
         return $this->hasOne('Taxonomic','id','parentid');
     }
 
+
+    public function recommended(){
+        return self::where('shows',1)->field('title,pic,create_time,id')->limit(4)->order('hits desc')->select();
+    }
+
 }

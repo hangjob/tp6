@@ -94,4 +94,12 @@ class Navtag extends BaseController
         return $this->showWebData(['data'=>$taxonomic]);
     }
 
+    public function search(){
+        $model = new ModelNavtag();
+        $ks = '开';
+        $where['it_name|describe'] = ['like', '%' . $ks . '%'];
+        $data = $model->where($where)->select();
+        return $this->showWebData(['data'=>$data]);
+    }
+
 }

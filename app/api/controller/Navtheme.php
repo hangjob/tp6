@@ -31,6 +31,7 @@ class Navtheme extends BaseController
             $query->field('name,id,parentid');
             $query->with('primary');
         }])->find();
+        $detail['recommended'] = $navtheme->recommended();
         return $this->showWebData(['data'=>$detail]);
     }
 }

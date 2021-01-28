@@ -36,6 +36,7 @@ Route::group('navtag',function (){
     Route::rule('popularIt','popularIt');
     Route::rule('daily','daily');
     Route::rule('category','category');
+    Route::rule('search','search');
 })->ext($urlPrefix)->prefix('navtag/');
 
 Route::group('taxonomic',function (){
