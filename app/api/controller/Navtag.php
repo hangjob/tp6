@@ -10,6 +10,7 @@
 namespace app\api\controller;
 use app\api\model\Navtag as ModelNavtag;
 use app\api\model\Taxonomic;
+use app\api\model\Navtheme;
 class Navtag extends BaseController
 {
 
@@ -96,9 +97,9 @@ class Navtag extends BaseController
 
     public function search(){
         $model = new ModelNavtag();
-        $ks = '开';
-        $where['it_name|describe'] = ['like', '%' . $ks . '%'];
-        $data = $model->where($where)->select();
+        $ks = input('ks');
+        $data['nav'] = $model->where('it_name|describe|keywords','like','%'.$ks.'%')->field('it_name,id,pic,icon,describe,create_time,author,keywords')->limit(15)->select();
+        $data['article'] = (new Navtheme())->where('title|describe|keywords','like','%'.$ks.'%')->field('title,id,pic,describe,create_time,keywords')->limit(15)->select();
         return $this->showWebData(['data'=>$data]);
     }
 
