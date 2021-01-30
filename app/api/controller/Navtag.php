@@ -11,6 +11,11 @@ namespace app\api\controller;
 use app\api\model\Navtag as ModelNavtag;
 use app\api\model\Taxonomic;
 use app\api\model\Navtheme;
+use app\validate\AddNavtag;
+use app\api\model\Member;
+use think\facade\Db;
+use think\Request;
+
 class Navtag extends BaseController
 {
 
@@ -101,6 +106,30 @@ class Navtag extends BaseController
         $data['nav'] = $model->where('it_name|describe|keywords','like','%'.$ks.'%')->field('it_name,id,pic,icon,describe,create_time,author,keywords')->limit(15)->select();
         $data['article'] = (new Navtheme())->where('title|describe|keywords','like','%'.$ks.'%')->field('title,id,pic,describe,create_time,keywords')->limit(15)->select();
         return $this->showWebData(['data'=>$data]);
+    }
+
+
+
+    // 添加
+    public function append(){
+        $model = new ModelNavtag();
+        $input = input('post.');
+        $input['hits'] = 1;
+        $input['create_time'] = time();
+        $uerid = $this->getUserId();
+        if($uerid){
+            if($input['type'] == 1){
+                unset($input['type']);
+                validate(AddNavtag::class)->batch(true)->check($input);
+                $data = \think\facade\Request::only($input);
+                $model->save($data);
+                (new Member())->where('userid',$uerid)->inc('point',10,30); // 发布推文奖励10分
+                $id = $model->id;
+                return $this->showWebData(['data'=>$id]);
+            }
+        }else{
+            return $this->showWebData(['message'=>'小可爱，你还没登录呢！','code'=>0]);
+        }
     }
 
 }

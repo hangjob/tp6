@@ -33,4 +33,10 @@ class Taxonomic extends BaseController
         return $this->showWebData(['data'=>$data]);
     }
 
+    public function types(){
+        $taxonomic = new ModelTaxonomic();
+        $data = $taxonomic->where('shows',1)->field('id,name,parentid')->select();
+        return $this->showWebData(['data'=>$data]);
+    }
+
 }

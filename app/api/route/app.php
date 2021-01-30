@@ -37,12 +37,18 @@ Route::group('navtag',function (){
     Route::rule('daily','daily');
     Route::rule('category','category');
     Route::rule('search','search');
+    Route::rule('append','append');
 })->ext($urlPrefix)->prefix('navtag/');
 
 Route::group('taxonomic',function (){
     Route::rule('items','items');
     Route::rule('youlike','youlike');
+    Route::rule('types','types');
 })->ext($urlPrefix)->prefix('taxonomic/');
+
+Route::group('primary',function (){
+    Route::rule('types','types');
+})->ext($urlPrefix)->prefix('primary/');
 
 
 Route::group('discuss',function (){
