@@ -34,4 +34,9 @@ class Navtheme extends BaseController
         $detail['recommended'] = $navtheme->recommended();
         return $this->showWebData(['data'=>$detail]);
     }
+
+    public function newest(){
+        $navTheme = (new NavthemeModel())->where('shows',1)->order('hits desc')->field('id,describe,title,pic')->limit(4)->select();
+        return $this->showWebData(['data'=>$navTheme]);
+    }
 }

@@ -85,6 +85,7 @@ Route::group('configuration',function (){
 Route::group('navtheme',function (){
     Route::rule('items','items');
     Route::rule('detail','detail');
+    Route::rule('newest','newest');
 })->ext($urlPrefix)->prefix('navtheme/');
 
 

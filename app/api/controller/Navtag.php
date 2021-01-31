@@ -83,7 +83,7 @@ class Navtag extends BaseController
     // 每日推荐
     public function daily(){
         $model = new ModelNavtag();
-        $data = $model->order('id desc')->with(['taxonomic'=>function($query){
+        $data = $model->order('id desc')->field('id,it_name,describe,create_time,pic,icon,parentid,url')->with(['taxonomic'=>function($query){
             $query->field('id,name,parentid,des');
             $query->with(['primary'=>function($query){
                 $query->field('id,name,mark,des');
