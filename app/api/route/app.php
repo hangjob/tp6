@@ -88,4 +88,9 @@ Route::group('navtheme',function (){
     Route::rule('newest','newest');
 })->ext($urlPrefix)->prefix('navtheme/');
 
+Route::group('appdownload',function (){
+    Route::rule('items','items');
+    Route::rule('ranking','ranking');
+})->ext($urlPrefix)->prefix('appdownload/');
+
 
