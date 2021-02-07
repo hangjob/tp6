@@ -31,4 +31,6 @@ return [
     'error_message'    => '页面错误！请稍后再试～',
     // 显示错误信息
     'show_error_msg'   => true,  // 调试时打开
+    'aeskey' => 'sgg45747ss223455', //aes 密钥 , 服务端和客户端必须保持一致
+    'aesiv' => 'yang5747ss223455'
 ];

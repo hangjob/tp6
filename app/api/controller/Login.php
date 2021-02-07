@@ -9,6 +9,7 @@
 
 namespace app\api\controller;
 use app\api\model\Member;
+use app\api\model\Inform;
 
 class Login extends BaseController
 {
@@ -45,6 +46,31 @@ class Login extends BaseController
     public function register(){
         $post = input('post.');
         validate(\app\validate\Register::class)->batch(true)->check($post);
+        $model = new Member();
+        $user = $model->where('usermail',$post['usermail'])->find();
+        if(!$user){
+            $password = $post['password'];
+            $post['usertime'] = time();
+            $post['usertimes'] = time();
+            $post['validate'] = substr(md5($post['username'].$post['usermail']), 8, 16);
+            $post['count'] = 1;
+            $sex = mt_rand(0,1);
+            $post['sex'] = $sex; // 随机性别
+            $post['grades'] = 0;
+            $post['status'] = 1;
+            $post['type'] = 0; // 账号密码注册的用户
+            $post['point'] = 20; // 分数
+            $userhead = mt_rand(1,20);
+            $post['userhead'] = '/uploads/20170401/'.$userhead.'.png'; // 随机选头像
+            $post['password'] = md5($password);
+            $userId = $model->strict(false)->insertGetId($post);
+            $data['uid'] = $userId;
+            $data['type'] = 30; // 注册完成后-通知扫二维码
+            (new Inform())->data($data)->save();
+            return $this->showWebData();
+        }else{
+            return $this->showWebData(['message'=>'账号已注册，请前往登录','code'=>0]);
+        }
     }
 
 }

@@ -94,3 +94,9 @@ Route::group('appdownload',function (){
 })->ext($urlPrefix)->prefix('appdownload/');
 
 
+Route::group('leave',function (){
+    Route::rule('add','add');
+    Route::rule('items','items');
+})->ext($urlPrefix)->prefix('leave/');
+
+
