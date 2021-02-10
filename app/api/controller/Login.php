@@ -10,6 +10,7 @@
 namespace app\api\controller;
 use app\api\model\Member;
 use app\api\model\Inform;
+use think\facade\Session;
 
 class Login extends BaseController
 {

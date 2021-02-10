@@ -8,5 +8,5 @@ return [
     // Session初始化
      \think\middleware\SessionInit::class,
     // 注册中间件
-    \app\middleware\Check::class
+     \app\middleware\Check::class
 ];
