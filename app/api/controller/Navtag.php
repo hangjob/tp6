@@ -12,6 +12,7 @@ use app\api\model\Navtag as ModelNavtag;
 use app\api\model\Taxonomic;
 use app\api\model\Navtheme;
 use app\validate\AddNavtag;
+use app\validate\AddNavtheme;
 use app\api\model\Member;
 use think\facade\Db;
 use think\Request;
@@ -55,6 +56,7 @@ class Navtag extends BaseController
                 }]);
             }
         ])->find();
+        $navtag->where('id',$id)->inc('hits',1)->update();
         $data['popularIt'] = $this->popularIt();
         $data['latest'] = $navtag->order('id desc')->limit(6)->field('it_name,id,describe,pic')->select();
         $data['hot'] = $navtag->where('pic','not null')->order('hits desc')->limit(6)->field('it_name,id,describe,pic')->select();
@@ -103,7 +105,7 @@ class Navtag extends BaseController
     public function search(){
         $model = new ModelNavtag();
         $ks = input('ks');
-        $data['nav'] = $model->where('it_name|describe|keywords','like','%'.$ks.'%')->field('it_name,id,pic,icon,describe,create_time,author,keywords')->limit(15)->select();
+        $data['nav'] = $model->where('it_name|describe|keywords','like','%'.$ks.'%')->order('id desc')->field('it_name,id,pic,icon,describe,create_time,author,keywords')->limit(15)->select();
         $data['article'] = (new Navtheme())->where('title|describe|keywords','like','%'.$ks.'%')->field('title,id,pic,describe,create_time,keywords')->limit(15)->select();
         return $this->showWebData(['data'=>$data]);
     }
@@ -112,15 +114,26 @@ class Navtag extends BaseController
 
     // 添加
     public function append(){
-        $model = new ModelNavtag();
+
         $input = input('post.');
         $input['hits'] = 1;
         $input['create_time'] = time();
         $uerid = $this->getUserId();
         if($uerid){
             if($input['type'] == 1){
+                $model = new ModelNavtag();
                 unset($input['type']);
                 validate(AddNavtag::class)->batch(true)->check($input);
+                $data = \think\facade\Request::only($input);
+                $model->save($data);
+                (new Member())->where('userid',$uerid)->inc('point',10,30); // 发布推文奖励10分
+                $id = $model->id;
+                return $this->showWebData(['data'=>$id]);
+            }
+            if($input['type'] == 2){
+                $model = new Navtheme();
+                unset($input['type']);
+                validate(AddNavtheme::class)->batch(true)->check($input);
                 $data = \think\facade\Request::only($input);
                 $model->save($data);
                 (new Member())->where('userid',$uerid)->inc('point',10,30); // 发布推文奖励10分

@@ -47,4 +47,5 @@ class Navtag extends BaseModel
     public function zan(){
         return $this->hasMany('Zan','fid','id')->where('type',1);
     }
+
 }

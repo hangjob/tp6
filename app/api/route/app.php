@@ -99,4 +99,35 @@ Route::group('leave',function (){
     Route::rule('items','items');
 })->ext($urlPrefix)->prefix('leave/');
 
+Route::group('special',function (){
+    Route::rule('list','list');
+    Route::rule('listids','listids');
+    Route::rule('detailNav','detailNav');
+})->ext($urlPrefix)->prefix('special/');
+
+
+
+
+
+
+
+/***********测试*************/
+
+Route::group('test',function (){
+    Route::rule('index','index');
+    Route::rule('items','items');
+    Route::rule('put','put');
+    Route::rule('delete','delete');
+    Route::rule('add','add');
+})->ext($urlPrefix)->prefix('test/');
+
+
+
+
+
+
+
+
+
+
 

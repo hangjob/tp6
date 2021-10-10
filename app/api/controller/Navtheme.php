@@ -9,6 +9,8 @@
 
 namespace app\api\controller;
 use app\api\model\Navtheme as NavthemeModel;
+use think\Request;
+
 
 class Navtheme extends BaseController
 {
@@ -31,6 +33,7 @@ class Navtheme extends BaseController
             $query->field('name,id,parentid');
             $query->with('primary');
         }])->find();
+        $navtheme->where('id',$id)->inc('hits',1)->update();
         $detail['recommended'] = $navtheme->recommended();
         return $this->showWebData(['data'=>$detail]);
     }

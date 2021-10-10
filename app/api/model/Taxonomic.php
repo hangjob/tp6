@@ -22,10 +22,17 @@ class Taxonomic extends BaseModel
         return $this->hasMany('Navtag','parentid','id');
     }
 
+
+    public function spitems(){
+        return $this->hasMany('Special','pid','id');
+    }
+
     public function items(){
         return $this->hasMany('Navtag','parentid','id')
             ->field('it_name,id,describe,parentid,shows,keywords,pic')->withLimit(4);
     }
+
+
 
 
     public function getDesAttr($value,$data){
